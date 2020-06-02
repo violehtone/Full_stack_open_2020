@@ -37,6 +37,11 @@ const App = (props) => {
     setBad(bad + 1)
   }
 
+  const all = good + bad + neutral
+  const average = (good + (bad*-1)) / all
+  const positive = (good / all) * 100
+
+
   return (
     <div>
       <div>
@@ -48,6 +53,9 @@ const App = (props) => {
         <p> good {good} </p>
         <p> neutral {neutral} </p>
         <p> bad {bad} </p>
+        <p> all {all} </p>
+        <p> average {average} </p>
+        <p> positive {positive} % </p>
       </div>
     </div>
   )
