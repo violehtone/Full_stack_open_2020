@@ -9,7 +9,8 @@ const App = ({ course }) => {
             <h1> {course.name} </h1>
             <ul>
                 {course.parts.map(course => 
-                    <Course key = {course.id} course = {course} />                )}
+                    <Course key = {course.id} course = {course} />
+                    )}
             </ul>
                 <b> Total of {total} exercises </b>
         </div>
