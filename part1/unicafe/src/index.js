@@ -4,43 +4,44 @@ import ReactDOM from 'react-dom'
 const Button = ( {onClick, text }) => (
   <button onClick = {onClick}> {text} </button>
 )
+
+const Statistics = (props) => {
+  const good = props.good
+  const bad = props.bad
+  const neutral = props.neutral
+
+  const all = good + bad + neutral
+  const average = (good + (bad*-1)) / all
+  const positive = (good / all) * 100
   
-const History = (props) => {
-  if (props.allClicks.length == 0) {
-    return(
-      <div> the app is used by pressing the buttons</div>
-    )
-  }
   return(
-  <div> button press history: {props.allClicks.join(' ')}</div>
-  )
-}
+    <div>
+      <h1> statistics </h1>
+      <p> good {good} </p>
+      <p> neutral {neutral} </p>
+      <p> bad {bad} </p>
+      <p> all {all} </p>
+      <p> average {average} </p>
+      <p> positive {positive} % </p>
+    </div>
+  )}
 
 const App = (props) => {
   const [good, setGood] = useState(0)
   const [bad, setBad] = useState(0)
   const [neutral, setNeutral] = useState(0)
-  //const [allClicks, setAll] = useState([])
 
   const handleGoodClick = () => {
-    //setAll(allClicks.concat('G'))
     setGood(good + 1)
   }
 
   const handleNeutralClick = () => {
-    //setAll(allClicks.concat('N'))
     setNeutral(neutral + 1)
   }
 
   const handleBadClick = () => {
-    //setAll(allClicks.concat('B'))
     setBad(bad + 1)
   }
-
-  const all = good + bad + neutral
-  const average = (good + (bad*-1)) / all
-  const positive = (good / all) * 100
-
 
   return (
     <div>
@@ -49,13 +50,7 @@ const App = (props) => {
         <Button onClick={handleGoodClick} text = 'good' />
         <Button onClick={handleNeutralClick} text = 'neutral' />
         <Button onClick={handleBadClick} text = 'bad' />
-        <h1> statistics </h1>
-        <p> good {good} </p>
-        <p> neutral {neutral} </p>
-        <p> bad {bad} </p>
-        <p> all {all} </p>
-        <p> average {average} </p>
-        <p> positive {positive} % </p>
+        <Statistics good = {good} bad = {bad} neutral = {neutral}> </Statistics>
       </div>
     </div>
   )
