@@ -14,9 +14,14 @@ const App = () => {
             name: newName
         }
     
-        setPersons(persons.concat(personObject))
-        setNewName('')
-    }
+        let duplicate = persons.some(person => person.name === newName)
+
+        if(duplicate) {
+            window.alert(`${newName} is already in phonebook`)
+        }else{
+            setPersons(persons.concat(personObject))
+            setNewName('')
+        }}
 
     const handleNameChange = (event) => {
         setNewName(event.target.value)
