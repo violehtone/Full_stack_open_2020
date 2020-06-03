@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import PersonList from './components/PersonList'
 import axios from 'axios'
 
-const App = (props) => {
+const App = () => {
     const [ persons, setPersons ] = useState([])
     const [ newName, setNewName ] = useState('')
     const [ newNumber, setNewNumber ] = useState('')
