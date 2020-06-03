@@ -22,7 +22,7 @@ const CountryList = ({countries}) => {
         <div>
             <ul> 
                 {countries.map(country => 
-                <Country name = {country.name}/>,
+                <Country name = {country.name}/>
                 )}
             </ul>
         </div>
