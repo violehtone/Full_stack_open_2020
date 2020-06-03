@@ -5,7 +5,7 @@ const PersonList = ({persons, del}) => {
     return(
         <ul>
         {persons.map(person =>
-            <Person name = {person.name} number = {person.number} del = {del} />)}
+            <Person name = {person.name} number = {person.number} />)}
         </ul>
     )}
 

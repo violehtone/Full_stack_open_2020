@@ -12,7 +12,6 @@ const App = () => {
       personService
         .getAll()
         .then(initialPersons => {
-          console.log('promise fulfilled')
           setPersons(initialPersons)
         })
         .catch(error => {
@@ -55,10 +54,6 @@ const App = () => {
     const handleNumberChange = (event) => {
         setNewNumber(event.target.value)
     }
-
-    const del = () => {
-      console.log("Click!")
-    }
   
     return (
       <div>
@@ -71,7 +66,7 @@ const App = () => {
           </div>
         </form>
         <h2>Numbers</h2>
-        <PersonList persons = {persons} del = {del} />
+        <PersonList persons = {persons} />
       </div>
     )
   }
