@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react'
 import PersonList from './components/PersonList'
-import axios from 'axios'
+import personService from './services/persons'
 
 const App = () => {
     const [ persons, setPersons ] = useState([])
@@ -9,13 +9,15 @@ const App = () => {
     const [ newNumber, setNewNumber ] = useState('')
 
     const hook = () => {
-        console.log('effect')
-        axios
-            .get('http://localhost:3001/persons')
-            .then(response => {
-                console.log('promise fulfilled')
-                setPersons(response.data)
-            })
+      personService
+        .getAll()
+        .then(initialPersons => {
+          console.log('promise fulfilled')
+          setPersons(initialPersons)
+        })
+        .catch(error => {
+          console.log('fail', error)
+        })
     }
 
     useEffect(hook, [])
@@ -34,9 +36,16 @@ const App = () => {
         if(duplicate) {
             window.alert(`${newName} is already in phonebook`)
         }else{
-            setPersons(persons.concat(personObject))
-            setNewName('')
-            setNewNumber('')
+          personService
+            .create(personObject)
+            .then(returnedPerson => {
+              setPersons(persons.concat(returnedPerson))
+              setNewName('')
+              setNewNumber('')
+            })
+            .catch(error => {
+              console.log('fail', error)
+            })
         }}
 
     const handleNameChange = (event) => {
@@ -45,6 +54,10 @@ const App = () => {
 
     const handleNumberChange = (event) => {
         setNewNumber(event.target.value)
+    }
+
+    const del = () => {
+      console.log("Click!")
     }
   
     return (
@@ -58,7 +71,7 @@ const App = () => {
           </div>
         </form>
         <h2>Numbers</h2>
-        <PersonList persons = {persons} />
+        <PersonList persons = {persons} del = {del} />
       </div>
     )
   }
