@@ -9,8 +9,6 @@ const App = () => {
     const [ newNumber, setNewNumber ] = useState('')
     const [ errorMessage, setErrorMessage] = useState(null)
 
-    console.log(persons)
-
     const hook = () => {
       personService
         .getAll()
@@ -40,11 +38,15 @@ const App = () => {
     const addPerson = (event) => {
         event.preventDefault()
         
+        let idmax = persons.reduce((maxId, person) => Math.max(maxId, person.id), 0)
+
         const personObject = {
-            id: persons.length,
             name: newName,
-            number: newNumber
+            number: newNumber,
+            id: idmax + 1
         }
+
+        console.log("Addind a person: ", personObject)
     
         let duplicate = persons.some(person => person.name === newName)
 
@@ -73,7 +75,7 @@ const App = () => {
         .remove(id)
         .then(response => {
           setPersons(persons.filter(p => p.id !== id))
-          console.log(person)
+          console.log("Deleting a person: ", person)
         })
         .catch(error => {
           if(error.response) {
