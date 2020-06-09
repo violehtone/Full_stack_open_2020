@@ -47,7 +47,7 @@ app.get('/api/persons/:id', (request, response) => {
 
 const generateId = () => {
     const maxId = persons.length > 0 
-        ? Math.max(...notes.map(n => n.id)) 
+        ? Math.max(...persons.map(n => n.id)) 
         : 0
     return maxId + 1
 }
@@ -56,9 +56,20 @@ const generateId = () => {
 app.post('/api/persons', (request, response) => {
     const body = request.body
 
-    if(!body.content) {
+    console.log(body)
+
+    // Check that name and number are given
+    if(!body.name || !body.number) {
+        return reseponse.status(400).json({
+            error: 'name or number missing'
+        })
+    }
+
+    // Check that name doesn't already exist
+    let duplicate = persons.some(person => person.name === body.name)
+    if(duplicate) {
         return response.status(400).json({
-            error: 'content missing'
+            error: 'Name already exists in phonebook'
         })
     }
 
