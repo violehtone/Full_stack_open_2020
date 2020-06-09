@@ -26,6 +26,14 @@ let persons = [
     }
 ]
 
+app.get('/info', (request, response) => {
+    const currentTime = new Date()
+    const information = `Phonebook has info for ${persons.length} people`
+    const result = information.concat("<br />", currentTime.toString())
+
+    response.send(result)
+})
+
 app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     const person = persons.find(person => person.id === id)
