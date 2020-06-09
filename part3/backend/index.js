@@ -52,6 +52,7 @@ const generateId = () => {
     return maxId + 1
 }
 
+//Exercise 3.5
 app.post('/api/persons', (request, response) => {
     const body = request.body
 
@@ -71,6 +72,7 @@ app.post('/api/persons', (request, response) => {
     response.json(person)
 })
 
+// exercise 3.4
 app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     persons = persons.filter(person => person.id !== id)
