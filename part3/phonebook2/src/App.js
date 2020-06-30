@@ -113,8 +113,5 @@ const App = () => {
       </div>
     )
   }
-
-  const cors = require('cors')
-  app.use(cors())
   
   export default App
